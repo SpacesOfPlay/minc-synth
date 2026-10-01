@@ -1,0 +1,33 @@
+# minc-synth patch 1
+profile modern
+param seq.a2 0.291667
+param seq.a3 0.5
+param seq.a4 0.791667
+param seq.a5 1.0
+param seq.a6 0.5
+param seq.a7 0.208333
+param seq.a8 0.708333
+param seq.range_a 0.5
+param seq.quant_a 1.0
+param seq.rate 0.705117
+param seq.length 0.277778
+param lowpass.cutoff 0.427273
+param lowpass.res 1.0
+param env1.attack 0.0
+param env1.decay 0.519795
+param env1.sustain 0.0
+param env1.release 0.424742
+param atten.gain1 0.5125
+param atten.gain2 1.0
+param out.level_l 1.0
+param out.level_r 1.0
+param out.master 1.0
+cable seq.a -> lowpass.cv1 color=0
+cable seq.gate -> atten.in1 color=1
+cable atten.out1 -> lowpass.in2 color=2
+cable seq.gate -> env1.gate color=3
+cable lowpass.out -> atten.in2 color=4
+cable atten.out2 -> amp1.in1 color=5
+cable env1.env -> amp1.cv1 color=6
+cable amp1.out -> out.l color=7
+cable amp1.out -> out.r color=8

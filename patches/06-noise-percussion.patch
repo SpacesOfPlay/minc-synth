@@ -1,0 +1,36 @@
+# minc-synth patch 1
+profile vintage
+param osc.octave 0.166667
+param bank2.freq 0.0
+param bank2.oct1 0.333333
+param seq.length 0.111111
+param band.center 0.7
+param band.width 0.485719
+param env1.attack 0.0
+param env1.decay 0.475773
+param env1.sustain 0.0
+param env1.release 0.36928
+param env2.attack 0.0
+param env2.decay 0.599485
+param env2.sustain 0.0
+param env2.release 0.5
+param mix1.level1 0.5
+param mix1.level2 0.9
+param out.level_l 0.971171
+param out.level_r 0.971171
+param out.master 1.0
+cable bank2.pulse1 -> gates.sig1 color=0
+cable gates.gate1 -> seq.clock color=1
+cable noise.white -> band.in color=2
+cable band.bp -> amp1.in1 color=3
+cable seq.gate -> env1.gate color=4
+cable env1.env -> amp1.cv1 color=5
+cable osc.sine -> amp2.in1 color=6
+cable seq.step1 -> env2.gate color=7
+cable seq.step4 -> env2.gate color=8
+cable seq.step6 -> env2.gate color=0
+cable env2.env -> amp2.cv1 color=1
+cable amp1.out -> mix1.in1 color=2
+cable amp2.out -> mix1.in2 color=3
+cable mix1.out -> out.l color=4
+cable mix1.out -> out.r color=5

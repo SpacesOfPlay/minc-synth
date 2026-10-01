@@ -1,0 +1,38 @@
+# minc-synth patch 1
+profile modern
+param bank1.freq 0.375
+param bank1.fine1 0.491429
+param bank1.oct2 0.333333
+param bank1.oct3 0.666667
+param bank1.fine3 0.510286
+param noise.rate 0.176779
+param noise.slew 0.962152
+param lowpass.cutoff 0.518182
+param lowpass.res 0.3
+param lowpass.cv1_depth 0.65
+param spectrum.125 0.8
+param spectrum.177 0.5
+param spectrum.354 0.3
+param spectrum.500 0.9
+param spectrum.707 0.2
+param spectrum.1k 0.7
+param spectrum.1.4k 0.2
+param spectrum.2k 0.5
+param spectrum.2.8k 0.15
+param spectrum.4k 0.4
+param spectrum.5.6k 0.1
+param spectrum.high 0.3
+param mix1.level1 0.5
+param mix1.level2 0.6
+param mix1.level3 0.35
+param out.level_l 0.883398
+param out.level_r 0.883398
+param out.master 1.0
+cable bank1.saw1 -> mix1.in1 color=0
+cable bank1.saw2 -> mix1.in2 color=1
+cable bank1.saw3 -> mix1.in3 color=2
+cable mix1.out -> spectrum.in color=3
+cable spectrum.out -> lowpass.in1 color=4
+cable noise.smooth -> lowpass.cv1 color=5
+cable lowpass.out -> out.l color=6
+cable lowpass.out -> out.r color=7

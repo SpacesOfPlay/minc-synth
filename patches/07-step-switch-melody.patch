@@ -1,0 +1,44 @@
+# minc-synth patch 1
+profile vintage
+param osc.octave 0.333333
+param osc.width 0.277778
+param bank2.freq 0.0
+param bank2.oct1 0.166667
+param seq.a3 0.125
+param seq.a5 0.208333
+param seq.a6 0.125
+param seq.a8 0.416667
+param seq.range_a 0.5
+param seq.quant_a 1.0
+param lowpass.cutoff 0.381818
+param lowpass.res 0.4
+param lowpass.cv1_depth 0.7
+param env1.attack 0.075258
+param env1.decay 0.575257
+param env1.sustain 0.6
+param env1.release 0.5
+param env2.attack 0.075258
+param env2.decay 0.519795
+param env2.sustain 0.1
+param env2.release 0.5
+param offsets.coarse2 0.529167
+param offsets.coarse3 0.55
+param out.level_l 0.828597
+param out.level_r 0.828597
+param out.master 1.0
+cable bank2.pulse1 -> gates.sig1 color=0
+cable gates.gate1 -> seq.clock color=1
+cable seq.clock -> stepsw.shift color=2
+cable offsets.out1 -> stepsw.a color=3
+cable offsets.out2 -> stepsw.b color=4
+cable offsets.out3 -> stepsw.c color=5
+cable stepsw.out -> osc.pitch1 color=6
+cable seq.a -> osc.pitch2 color=7
+cable seq.gate -> env1.gate color=8
+cable seq.gate -> env2.gate color=0
+cable osc.pulse -> lowpass.in1 color=1
+cable lowpass.out -> amp1.in1 color=2
+cable env1.env -> amp1.cv1 color=3
+cable env2.env -> lowpass.cv1 color=4
+cable amp1.out -> out.l color=5
+cable amp1.out -> out.r color=6

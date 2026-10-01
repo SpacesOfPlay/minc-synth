@@ -1,0 +1,7 @@
+Vendored from sokol-samples-minc (https://github.com/SpacesOfPlay/sokol-samples-minc).
+source: ../sokol-samples-minc
+commit: e5d8801
+files:  sokol_gl.mc sokol_debugtext.mc sokol_time.mc fontstash.mc sokol_fontstash.mc
+
+The minc install ships sokol_all and sokol_audio but not these.
+Refresh with `minc build vendor` after a compiler update.

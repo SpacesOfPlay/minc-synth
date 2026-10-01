@@ -1,0 +1,33 @@
+# minc-synth patch 1
+profile modern
+param keys.glide 0.394128
+param keys.octave 0.333333
+param bank1.fine1 0.494
+param bank1.oct2 0.333333
+param bank1.fine3 0.506857
+param lowpass.cutoff 0.336364
+param lowpass.res 0.35
+param lowpass.drive 0.669518
+param lowpass.cv1_depth 0.775
+param env1.attack 0.150515
+param env1.release 0.544023
+param env2.attack 0.150515
+param env2.decay 0.636017
+param env2.sustain 0.15
+param env2.release 0.575257
+param mix1.level1 0.55
+param mix1.level2 0.55
+param mix1.level3 0.55
+param out.level_l 0.864088
+param out.level_r 0.864088
+param out.master 1.0
+cable keys.pitch -> bank1.pitch1 color=0
+cable bank1.saw1 -> mix1.in1 color=1
+cable bank1.saw2 -> mix1.in2 color=2
+cable bank1.saw3 -> mix1.in3 color=3
+cable mix1.out -> lowpass.in1 color=4
+cable lowpass.out -> amp1.in1 color=5
+cable env1.env -> amp1.cv1 color=6
+cable env2.env -> lowpass.cv1 color=7
+cable amp1.out -> out.l color=8
+cable amp1.out -> out.r color=0

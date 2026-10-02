@@ -5,7 +5,8 @@ The sound and layout follow the large 1970s studio modular systems, with
 the Moog System 55 as the sonic inspiration. The names and visuals are
 original.
 
-It runs on Windows, macOS and Linux, and in the browser (wasm).
+It runs on Windows, macOS and Linux, and in the browser (wasm). Please do
+report any bugs found.
 
 ## Install minc
 

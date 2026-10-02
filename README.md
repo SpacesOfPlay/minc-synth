@@ -8,6 +8,8 @@ original.
 It runs on Windows, macOS and Linux, and in the browser (wasm). Please do
 report any bugs found.
 
+Live demo: https://spacesofplay.github.io/minc-synth/
+
 ## Install minc
 
 Windows:

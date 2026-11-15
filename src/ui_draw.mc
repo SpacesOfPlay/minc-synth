@@ -139,10 +139,10 @@ void fill_round_rect(Rect r, f32 rad, float3 c, f32 a) {
     fill_rect(r.x + rad, r.y, r.w - 2.0f * rad, r.h, c, a);
     fill_rect(r.x, r.y + rad, rad, r.h - 2.0f * rad, c, a);
     fill_rect(r.x + r.w - rad, r.y + rad, rad, r.h - 2.0f * rad, c, a);
-    fan(float2{ r.x + rad, r.y + rad }, rad, PI, 1.5f * PI, 6, c, a);
-    fan(float2{ r.x + r.w - rad, r.y + rad }, rad, 1.5f * PI, TWO_PI, 6, c, a);
-    fan(float2{ r.x + r.w - rad, r.y + r.h - rad }, rad, 0.0f, 0.5f * PI, 6, c, a);
-    fan(float2{ r.x + rad, r.y + r.h - rad }, rad, 0.5f * PI, PI, 6, c, a);
+    fan(float2{ r.x + rad, r.y + rad }, rad, PI_F, 1.5f * PI_F, 6, c, a);
+    fan(float2{ r.x + r.w - rad, r.y + rad }, rad, 1.5f * PI_F, TWO_PI, 6, c, a);
+    fan(float2{ r.x + r.w - rad, r.y + r.h - rad }, rad, 0.0f, 0.5f * PI_F, 6, c, a);
+    fan(float2{ r.x + rad, r.y + r.h - rad }, rad, 0.5f * PI_F, PI_F, 6, c, a);
 }
 
 // A polyline `w` wide as one triangle strip, with each joint on the

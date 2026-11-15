@@ -780,8 +780,6 @@ sdtx_context SDTX_DEFAULT_CONTEXT = sdtx_context{0x00010001};
 // ██ ██      ██ ██      ███████ ███████ ██      ██ ███████ ██   ████    ██    ██   ██    ██    ██  ██████  ██   ████
 //
 // >>implementation
-when !(defined(SOKOL_DEBUG)) {
-}
 /* embedded font data */
 private {
 u8[2048] _sdtx_font_kc853 = {
@@ -1771,8 +1769,8 @@ sdtx_context_desc_t _sdtx_context_desc_defaults(sdtx_context_desc_t* desc) {
     sdtx_context_desc_t res = *desc;
     res.max_commands = res.max_commands == 0 ? 4096 : res.max_commands;
     res.char_buf_size = res.char_buf_size == 0 ? 4096 : res.char_buf_size;
-    res.canvas_width = cast(f32, res.canvas_width == 0.0f ? 640.0f : res.canvas_width);
-    res.canvas_height = cast(f32, res.canvas_height == 0.0f ? 480.0f : res.canvas_height);
+    res.canvas_width = res.canvas_width == 0.0f ? 640.0f : res.canvas_width;
+    res.canvas_height = res.canvas_height == 0.0f ? 480.0f : res.canvas_height;
     res.tab_width = res.tab_width == 0 ? 4 : res.tab_width;
     assert(res.char_buf_size > 0);
     assert(cast(i64, !isnan(res.canvas_width)));
@@ -1930,7 +1928,7 @@ void _sdtx_setup_common() {
     img_desc.width = 256 * 8;
     img_desc.height = 8 * 8;
     img_desc.pixel_format = SG_PIXELFORMAT_R8;
-    img_desc.data.mip_levels[0] = sg_range{&_sdtx.font_pixels, sizeof(_sdtx.font_pixels)};
+    img_desc.data = sg_range{&_sdtx.font_pixels, sizeof(_sdtx.font_pixels)};
     img_desc.label = "sdtx-font-texture";
     _sdtx.font_img = sg_make_image(&img_desc);
     assert(cast(u32, SG_INVALID_ID) != _sdtx.font_img.id);
@@ -2163,7 +2161,7 @@ sdtx_desc_t _sdtx_desc_defaults(sdtx_desc_t* desc) {
     res.printf_buf_size = res.printf_buf_size == 0 ? 4096 : res.printf_buf_size;
     for i32 i = 0; i < 8; i++ {
         if res.fonts[i].data.ptr != null {
-            res.fonts[i].last_char = cast(u8, res.fonts[i].last_char == 0 ? 255 : res.fonts[i].last_char);
+            res.fonts[i].last_char = res.fonts[i].last_char == 0 ? 255 : res.fonts[i].last_char;
         }
     }
     res.context = _sdtx_context_desc_defaults(&res.context);

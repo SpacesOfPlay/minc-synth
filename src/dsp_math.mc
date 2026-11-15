@@ -6,7 +6,6 @@
 
 import math;
 
-const f32 PI = 3.14159265f;
 const f32 TWO_PI = 6.28318531f;
 const f32 C4_HZ = 261.625565f;          // 0 V on a pitch input
 
@@ -146,7 +145,7 @@ f32 tan_quadrant(f32 x) {
 // Trapezoidal integrator gain for a cutoff in Hz, clamped below Nyquist.
 f32 prewarp(f32 fc, f32 sample_rate) {
     f32 f = clampf(fc, 1.0f, 0.49f * sample_rate);
-    return tan_quadrant(PI * f / sample_rate);
+    return tan_quadrant(PI_F * f / sample_rate);
 }
 
 // A cutoff's prewarped gain from its 1 V/oct voltage, worked out again

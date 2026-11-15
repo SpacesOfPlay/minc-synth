@@ -68,7 +68,7 @@ void test_tan() {
     f64 worst = 0.0;
     f64 worst_cents = 0.0;
     for i32 i = 1; i <= 49000; i++ {
-        f32 x = cast(f32, i) * (0.49f * PI / 49000.0f);
+        f32 x = cast(f32, i) * (0.49f * PI_F / 49000.0f);
         f64 g = tan_quadrant(x);
         f64 e = fabs(g / tan(cast(f64, x)) - 1.0);
         if e > worst { worst = e; }

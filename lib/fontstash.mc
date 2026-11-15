@@ -963,16 +963,16 @@ i32 stbtt__isfont(stbtt_uint8* font) {
     if font[0] == 49 && font[1] == 0 && font[2] == 0 && font[3] == 0 {
         return 1;
     }
-    if font[0] == cast(u8, "typ1"[0]) && font[1] == cast(u8, "typ1"[1]) && font[2] == cast(u8, "typ1"[2]) && font[3] == cast(u8, "typ1"[3]) {
+    if cast(i32, font[0]) == cast(i32, "typ1"[0]) && cast(i32, font[1]) == cast(i32, "typ1"[1]) && cast(i32, font[2]) == cast(i32, "typ1"[2]) && cast(i32, font[3]) == cast(i32, "typ1"[3]) {
         return 1;
     }
-    if font[0] == cast(u8, "OTTO"[0]) && font[1] == cast(u8, "OTTO"[1]) && font[2] == cast(u8, "OTTO"[2]) && font[3] == cast(u8, "OTTO"[3]) {
+    if cast(i32, font[0]) == cast(i32, "OTTO"[0]) && cast(i32, font[1]) == cast(i32, "OTTO"[1]) && cast(i32, font[2]) == cast(i32, "OTTO"[2]) && cast(i32, font[3]) == cast(i32, "OTTO"[3]) {
         return 1;
     }
     if font[0] == 0 && font[1] == 1 && font[2] == 0 && font[3] == 0 {
         return 1;
     }
-    if font[0] == cast(u8, "true"[0]) && font[1] == cast(u8, "true"[1]) && font[2] == cast(u8, "true"[2]) && font[3] == cast(u8, "true"[3]) {
+    if cast(i32, font[0]) == cast(i32, "true"[0]) && cast(i32, font[1]) == cast(i32, "true"[1]) && cast(i32, font[2]) == cast(i32, "true"[2]) && cast(i32, font[3]) == cast(i32, "true"[3]) {
         return 1;
     }
     return 0;
@@ -985,7 +985,7 @@ stbtt_uint32 stbtt__find_table(stbtt_uint8* data, stbtt_uint32 fontstart, u8* ta
     stbtt_int32 i;
     for i = 0; i < num_tables; ++i {
         stbtt_uint32 loc = tabledir + cast(u32, 16 * i);
-        if (data + loc + 0)[0] == cast(u8, tag[0]) && (data + loc + 0)[1] == cast(u8, tag[1]) && (data + loc + 0)[2] == cast(u8, tag[2]) && (data + loc + 0)[3] == cast(u8, tag[3]) {
+        if cast(i32, (data + loc + 0)[0]) == cast(i32, tag[0]) && cast(i32, (data + loc + 0)[1]) == cast(i32, tag[1]) && cast(i32, (data + loc + 0)[2]) == cast(i32, tag[2]) && cast(i32, (data + loc + 0)[3]) == cast(i32, tag[3]) {
             return ttULONG(data + loc + 8);
         }
     }
@@ -996,7 +996,7 @@ i32 stbtt_GetFontOffsetForIndex_internal(u8* font_collection, i32 index) {
     if stbtt__isfont(font_collection) != 0 {
         return index == 0 ? 0 : -1;
     }
-    if font_collection[0] == cast(u8, "ttcf"[0]) && font_collection[1] == cast(u8, "ttcf"[1]) && font_collection[2] == cast(u8, "ttcf"[2]) && font_collection[3] == cast(u8, "ttcf"[3]) {
+    if cast(i32, font_collection[0]) == cast(i32, "ttcf"[0]) && cast(i32, font_collection[1]) == cast(i32, "ttcf"[1]) && cast(i32, font_collection[2]) == cast(i32, "ttcf"[2]) && cast(i32, font_collection[3]) == cast(i32, "ttcf"[3]) {
         if ttULONG(font_collection + 4) == 0x00010000 || ttULONG(font_collection + 4) == 0x00020000 {
             stbtt_int32 n = ttLONG(font_collection + 8);
             if index >= n {
@@ -1012,7 +1012,7 @@ i32 stbtt_GetNumberOfFonts_internal(u8* font_collection) {
     if stbtt__isfont(font_collection) != 0 {
         return 1;
     }
-    if font_collection[0] == cast(u8, "ttcf"[0]) && font_collection[1] == cast(u8, "ttcf"[1]) && font_collection[2] == cast(u8, "ttcf"[2]) && font_collection[3] == cast(u8, "ttcf"[3]) {
+    if cast(i32, font_collection[0]) == cast(i32, "ttcf"[0]) && cast(i32, font_collection[1]) == cast(i32, "ttcf"[1]) && cast(i32, font_collection[2]) == cast(i32, "ttcf"[2]) && cast(i32, font_collection[3]) == cast(i32, "ttcf"[3]) {
         if ttULONG(font_collection + 4) == 0x00010000 || ttULONG(font_collection + 4) == 0x00020000 {
             return ttLONG(font_collection + 8);
         }
@@ -1022,7 +1022,7 @@ i32 stbtt_GetNumberOfFonts_internal(u8* font_collection) {
 
 stbtt__buf stbtt__get_subrs(stbtt__buf cff, stbtt__buf fontdict) {
     stbtt_uint32 subrsoff = 0;
-    stbtt_uint32[2] private_loc = {0, 0};
+    stbtt_uint32[2] private_loc;
     noinit stbtt__buf pdict;
     stbtt__dict_get_ints(&fontdict, 18, 2, private_loc);
     if !private_loc[1] || !private_loc[0] {
@@ -2871,7 +2871,7 @@ i32 stbtt_BakeFontBitmap_internal(u8* data, i32 offset, f32 pixel_height, u8* pi
 }
 
 void stbtt_GetBakedQuad(stbtt_bakedchar* chardata, i32 pw, i32 ph, i32 char_index, f32* xpos, f32* ypos, stbtt_aligned_quad* q, i32 opengl_fillrule) {
-    var d3d_bias = cast(f32, opengl_fillrule != 0 ? 0.0f : -0.5f);
+    f32 d3d_bias = opengl_fillrule != 0 ? 0.0f : -0.5f;
     f32 ipw = 1.0f / cast(f32, pw);
     f32 iph = 1.0f / cast(f32, ph);
     stbtt_bakedchar* b = chardata + char_index;
@@ -3287,8 +3287,8 @@ i32 stbtt__ray_intersect_bezier(f32* orig, f32* ray, f32* q0, f32* q1, f32* q2, 
     f32 a = q0perp - 2.0f * q1perp + q2perp;
     f32 b = q1perp - q0perp;
     f32 c = q0perp - roperp;
-    var s0 = cast(f32, 0.0);
-    var s1 = cast(f32, 0.0);
+    f32 s0 = cast(f32, 0.0);
+    f32 s1 = cast(f32, 0.0);
     i32 num_s = 0;
     if a != 0.0 {
         f32 discr = b * b - a * c;
@@ -4785,8 +4785,8 @@ void fonsDrawDebug(FONScontext* stash, f32 x, f32 y) {
     i32 i;
     i32 w = stash.params.width;
     i32 h = stash.params.height;
-    var u = cast(f32, w == 0 ? 0.0f : 1.0f / cast(f32, w));
-    var v = cast(f32, h == 0 ? 0.0f : 1.0f / cast(f32, h));
+    f32 u = w == 0 ? 0.0f : 1.0f / cast(f32, w);
+    f32 v = h == 0 ? 0.0f : 1.0f / cast(f32, h);
     if stash.nverts + 6 + 6 > 1024 {
         fons__flush(stash);
     }
